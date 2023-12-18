@@ -209,9 +209,7 @@ export const SystemPrompt: FC<Props> = ({
               : 'hidden'
           }`,
         }}
-        placeholder={
-          t(`Enter a prompt or type "/" to select a prompt...`) || ''
-        }
+        placeholder={t(`Enter a prompt...`) || ''}
         value={t(value) || ''}
         rows={1}
         onChange={handleChange}

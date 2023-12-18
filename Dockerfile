@@ -25,5 +25,12 @@ COPY --from=build /app/next-i18next.config.js ./next-i18next.config.js
 # Expose the port the app will run on
 EXPOSE 3000
 
+# Add environment variables
+ENV DEFAULT_MODEL=mistralai/Mistral-7B-Instruct-v0.1
+ENV OPENAI_API_HOST=https://enclave.blyss.dev
+ENV OPENAI_API_KEY=EMPTY
+ENV GOOGLE_API_KEY=EMPTY
+ENV GOOGLE_CSE_ID=EMPTY
+
 # Start the application
 CMD ["npm", "start"]

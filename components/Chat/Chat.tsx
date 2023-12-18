@@ -29,10 +29,10 @@ import Spinner from '../Spinner';
 import { ChatInput } from './ChatInput';
 import { ChatLoader } from './ChatLoader';
 import { ErrorMessageDiv } from './ErrorMessageDiv';
+import { MemoizedChatMessage } from './MemoizedChatMessage';
 import { ModelSelect } from './ModelSelect';
 import { SystemPrompt } from './SystemPrompt';
 import { TemperatureSlider } from './Temperature';
-import { MemoizedChatMessage } from './MemoizedChatMessage';
 
 interface Props {
   stopConversationRef: MutableRefObject<boolean>;
@@ -350,7 +350,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
   return (
     <div className="relative flex-1 overflow-hidden bg-white dark:bg-[#343541]">
       {!(apiKey || serverSideApiKeyIsSet) ? (
-        <div className="mx-auto flex h-full w-[300px] flex-col justify-center space-y-6 sm:w-[600px]">
+        <div className="mx-auto flex h-full w-[300px] flex-col justify-center space-y-6 sm:w-[650px]">
           <div className="text-center text-4xl font-bold text-black dark:text-white">
             Welcome to Chatbot UI
           </div>
@@ -398,16 +398,63 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
           >
             {selectedConversation?.messages.length === 0 ? (
               <>
-                <div className="mx-auto flex flex-col space-y-5 md:space-y-10 px-3 pt-5 md:pt-12 sm:max-w-[600px]">
-                  <div className="text-center text-3xl font-semibold text-gray-800 dark:text-gray-100">
-                    {models.length === 0 ? (
+                <div className="mx-auto flex flex-col space-y-5 md:space-y-12 px-3 pt-5 md:pt-12 sm:max-w-[650px] overflow-y-scroll max-h-[680px] md:max-h-none">
+                  {models.length === 0 ? (
+                    <div className="text-center text-3xl font-semibold text-gray-800 dark:text-gray-100">
                       <div>
                         <Spinner size="16px" className="mx-auto" />
                       </div>
-                    ) : (
-                      'Chatbot UI'
-                    )}
-                  </div>
+                    </div>
+                  ) : (
+                    <div className="text-left max-h-full">
+                      <div className="mb-6">
+                        <div className="text-left text-4xl font-semibold text-black dark:text-white mb-2">
+                          Blyss Confidential AI
+                        </div>
+                        <div className="text-left text-lg text-black dark:text-white font-normal">
+                          Run AI models on ultrafast servers, encrypted
+                          end-to-end.
+                        </div>
+                      </div>
+
+                      <div className="text-left text-gray-500 dark:text-gray-400">
+                        <div className="mb-2">
+                          Blyss Confidential AI models run inside secure
+                          enclaves, which keep all messages encrypted, even
+                          while in use. No one—not even us—ever gets a chance to
+                          see your data.
+                        </div>
+                        <div className="mb-2">
+                          Your connection uses the enclave features of the
+                          NVIDIA Hopper GPU to establish a high-security trusted
+                          computing environment, and is backed by a
+                          cryptographically signed statement that identifies
+                          exactly what code is running.
+                        </div>
+                        <div className="mb-2">
+                          Learn more in our{' '}
+                          <a
+                            href="https://blog.blyss.dev/confidential-ai-from-gpu-enclaves/"
+                            target="_blank"
+                            rel="noreferrer"
+                            className="underline"
+                          >
+                            technical deep-dive
+                          </a>
+                          , or{' '}
+                          <a
+                            href="https://calendar.app.google/n1zVWeURhzx21DJH6"
+                            target="_blank"
+                            rel="noreferrer"
+                            className="underline"
+                          >
+                            book a call
+                          </a>{' '}
+                          with us to get API access.
+                        </div>
+                      </div>
+                    </div>
+                  )}
 
                   {models.length > 0 && (
                     <div className="flex h-full flex-col space-y-4 rounded-lg border border-neutral-200 p-4 dark:border-neutral-600">

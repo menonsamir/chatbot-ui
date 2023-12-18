@@ -1,5 +1,3 @@
-import { OPENAI_API_TYPE } from '../utils/app/const';
-
 export interface OpenAIModel {
   id: string;
   name: string;
@@ -17,7 +15,7 @@ export enum OpenAIModelID {
 // in case the `DEFAULT_MODEL` environment variable is not set or set to an unsupported model
 export const fallbackModelID = OpenAIModelID.GPT_3_5;
 
-export const OpenAIModels: Record<OpenAIModelID, OpenAIModel> = {
+export const OpenAIModels: Record<any, OpenAIModel> = {
   [OpenAIModelID.GPT_3_5]: {
     id: OpenAIModelID.GPT_3_5,
     name: 'GPT-3.5',
@@ -39,6 +37,12 @@ export const OpenAIModels: Record<OpenAIModelID, OpenAIModel> = {
   [OpenAIModelID.GPT_4_32K]: {
     id: OpenAIModelID.GPT_4_32K,
     name: 'GPT-4-32K',
+    maxLength: 96000,
+    tokenLimit: 32000,
+  },
+  'mistralai/Mistral-7B-Instruct-v0.1': {
+    id: 'mistralai/Mistral-7B-Instruct-v0.1',
+    name: 'mistralai/Mistral-7B-Instruct-v0.1',
     maxLength: 96000,
     tokenLimit: 32000,
   },
